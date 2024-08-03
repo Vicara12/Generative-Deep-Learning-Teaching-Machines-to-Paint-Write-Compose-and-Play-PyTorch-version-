@@ -24,15 +24,13 @@ to_one_hot = Lambda(lambda y: torch.zeros(10, dtype=torch.float).scatter_(0, tor
 img_transf = tr.Compose([tr.Resize((input_res,input_res)),
                          tr.ToTensor()])
 
-root_dir = "/home/anon/proyectos/deep_learning/generative_book/ch2/"
-
-train_data = tv.datasets.CIFAR10(root_dir,
+train_data = tv.datasets.CIFAR10(os.path.realpath(__file__),
                                  train = True,
                                  transform=img_transf,
                                  target_transform=to_one_hot,
                                  download=True)
 train_data_loader = data.DataLoader(train_data, batch_size=batch_size, shuffle=True)
-test_data = tv.datasets.CIFAR10(root_dir,
+test_data = tv.datasets.CIFAR10(os.path.realpath(__file__),
                                 train = False,
                                 transform=img_transf,
                                 target_transform=to_one_hot,
@@ -118,7 +116,7 @@ if use_cnn:
 else:
   net = MLP((3,input_res,input_res), len(labels))
 if input("load model?: ")[0] == 'y':
-  net_state_dict = torch.load(root_dir+f"model/{model_name}")
+  net_state_dict = torch.load(os.path.realpath(__file__)+f"model/{model_name}")
   net.load_state_dict(net_state_dict)
   
 optimizer = optim.Adam(net.parameters(), lr=0.0005)
@@ -184,7 +182,7 @@ if input("train model?: ")[0] == 'y':
         device=device)
 
 if input("save model?: ")[0] == 'y':
-  torch.save(net.state_dict(), root_dir+f"model/{model_name}")
+  torch.save(net.state_dict(), os.path.realpath(__file__)+f"model/{model_name}")
 
 while True:
   url = input("image url: ")
