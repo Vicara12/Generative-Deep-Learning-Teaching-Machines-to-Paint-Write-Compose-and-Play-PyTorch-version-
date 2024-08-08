@@ -32,7 +32,7 @@ def train(model, optimizer, loss_fn, train_loader, val_loader, epochs=20, device
   print(f"Trainning took {time() - t_ini} seconds")
 
 def trainVariational(model, optimizer, loss_fn, train_loader, val_loader, epochs=20, device="cpu"):
-  beta = 1/10000 # mixing of kn and other loss
+  beta = 1/100000 # mixing of kn and other loss
   t_ini = time()
   kl_loss_fn = lambda mean, log_var: -0.5*torch.sum(torch.ones(mean.shape) + log_var - mean**2 - torch.exp(log_var))
   for epoch in range(epochs):

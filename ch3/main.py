@@ -61,7 +61,7 @@ if input("train model?: ")[0] == 'y':
           loss_fn,
           train_data_loader,
           train_data_loader,
-          epochs=20,
+          epochs=5,
           device=device)
 
 if input("save model?: ")[0] == 'y':
