@@ -51,9 +51,10 @@ if input("load model?: ")[0] == 'y':
   discriminator.load_state_dict(disc_state_dict)
 
 optimizer = optim.Adam(chain(generator.parameters(), discriminator.parameters()), lr=0.001)
+# optimizer = optim.Adam(discriminator.parameters(), lr=0.001)
 
-# print(f"INFO: model {generator.name} has {generator.params} params ({generator.trainable_params} trainable)")
-# print(f"INFO: model {discriminator.name} has {discriminator.params} params ({discriminator.trainable_params} trainable)")
+print(f"INFO: model {generator.name} has {generator.params} params ({generator.trainable_params} trainable)")
+print(f"INFO: model {discriminator.name} has {discriminator.params} params ({discriminator.trainable_params} trainable)")
 
 train_f = train
 train_f(generator, discriminator, optimizer, loss_fn, train_data_loader,

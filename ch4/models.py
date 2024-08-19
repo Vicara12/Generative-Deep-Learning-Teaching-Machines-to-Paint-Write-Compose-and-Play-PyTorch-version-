@@ -59,19 +59,19 @@ class Generator (nn.Module):
         super(Generator, self).__init__()
         self._deconvolutions = nn.Sequential(
             nn.ConvTranspose2d(100,512,4,1,padding=0,output_padding=0),
-            nn.LazyBatchNorm2d(512, momentum=0.9),
+            nn.BatchNorm2d(512, momentum=0.9),
             nn.LeakyReLU(0.2),
 
             nn.ConvTranspose2d(512,256,4,2,padding=1,output_padding=0),
-            nn.LazyBatchNorm2d(256, momentum=0.9),
+            nn.BatchNorm2d(256, momentum=0.9),
             nn.LeakyReLU(0.2),
 
             nn.ConvTranspose2d(256,128,4,2,padding=1,output_padding=0),
-            nn.LazyBatchNorm2d(128, momentum=0.9),
+            nn.BatchNorm2d(128, momentum=0.9),
             nn.LeakyReLU(0.2),
 
             nn.ConvTranspose2d(128,64,4,2,padding=1,output_padding=0),
-            nn.LazyBatchNorm2d(64, momentum=0.9),
+            nn.BatchNorm2d(64, momentum=0.9),
             nn.LeakyReLU(0.2),
 
             nn.ConvTranspose2d(64,1,4,2,padding=1,output_padding=0),
